@@ -1,28 +1,27 @@
 from typing import List
 
-from app import crud, deps
-from app.schemas.user import User, UserCreate
+from app import crud, deps, schemas
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 router = APIRouter()
 
 
-@router.post("/users/", response_model=User)
-def create_user(user: UserCreate, db: Session = Depends(deps.get_db)):
+@router.get("/users/", response_model=List[schemas.User])
+def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(deps.get_db)):
+    users = crud.user.get_multi(db, skip=skip, limit=limit)
+    return users
+
+
+@router.post("/users/", response_model=schemas.User)
+def create_user(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
     db_user = crud.user.get_by_email(db, email=user.email)
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
     return crud.user.create(db, obj_in=user)
 
 
-@router.get("/users/", response_model=List[User])
-def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(deps.get_db)):
-    users = crud.user.get_multi(db, skip=skip, limit=limit)
-    return users
-
-
-@router.get("/users/{user_id}", response_model=User)
+@router.get("/users/{user_id}", response_model=schemas.User)
 def read_user(user_id: int, db: Session = Depends(deps.get_db)):
     db_user = crud.user.get(db, id=user_id)
     if db_user is None:
