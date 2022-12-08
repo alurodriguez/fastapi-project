@@ -1,11 +1,6 @@
 import os
-from dotenv import load_dotenv
 
-from pathlib import Path
 from pydantic import BaseSettings
-
-env_path = Path(".") / ".env"
-load_dotenv(dotenv_path=env_path)
 
 
 class Settings(BaseSettings):
@@ -13,7 +8,7 @@ class Settings(BaseSettings):
     PROJECT_VERSION: str = "1.0.0"
 
     POSTGRES_USER: str = os.getenv("POSTGRES_USER")
-    POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
+    POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
     POSTGRES_SERVER: str = os.getenv("POSTGRES_SERVER", "localhost")
     POSTGRES_PORT: str = os.getenv(
         "POSTGRES_PORT", 5432
@@ -21,6 +16,9 @@ class Settings(BaseSettings):
     POSTGRES_DB: str = os.getenv("POSTGRES_DB", "tdd")
     # SQLALCHEMY_DATABASE_URI = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
     SQLALCHEMY_DATABASE_URI = "sqlite:///app.db"
+
+    class Config:
+        env_file = ".env"
 
 
 settings = Settings()
