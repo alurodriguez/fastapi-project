@@ -35,6 +35,9 @@ uvloop = "^0.17.0"
 watchgod = "^0.8.2"
 websockets = "^10.4"
 zipp = "^3.11.0"
+psycopg2 = "^2.9.5"
+pytest = "^7.2.0"
+httpx = "^0.23.1"
 
 
 [build-system]
