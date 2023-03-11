@@ -1,15 +1,15 @@
-from typing import List, Optional
+from typing import Optional
 
-from pydantic import BaseModel
-
-from .item import Item
+from pydantic import BaseModel, EmailStr
 
 
 class UserBase(BaseModel):
-    email: str
+    email: Optional[EmailStr] = None
+    is_active: Optional[bool] = True
 
 
 class UserCreate(UserBase):
+    email: EmailStr
     password: str
 
 
@@ -17,10 +17,16 @@ class UserUpdate(UserBase):
     password: Optional[str] = None
 
 
-class User(UserBase):
-    id: int
-    is_active: bool
-    items: List[Item] = []
+class UserInDBBase(UserBase):
+    id: Optional[int] = None
 
     class Config:
         orm_mode = True
+
+
+class User(UserInDBBase):
+    pass
+
+
+class UserInDB(UserInDBBase):
+    hashed_password: str

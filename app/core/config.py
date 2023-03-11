@@ -1,13 +1,17 @@
 import os
+import secrets
+
 from dotenv import load_dotenv
-from pathlib import Path
 from pydantic import BaseSettings
 
 load_dotenv()
 
+
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Items API"
     PROJECT_VERSION: str = "1.0.0"
+    SECRET_KEY: str = secrets.token_urlsafe(32)
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     POSTGRES_USER: str = os.getenv("POSTGRES_USER")
     POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
@@ -21,5 +25,6 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = ".env"
+
 
 settings = Settings()
