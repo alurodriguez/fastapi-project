@@ -40,6 +40,7 @@ pytest = "^7.2.0"
 httpx = "^0.23.1"
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 python-multipart = "^0.0.6"
+tenacity = "^8.2.2"
 
 
 [build-system]

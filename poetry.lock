@@ -573,6 +573,17 @@ typing-extensions = {version = ">=3.10.0", markers = "python_version < \"3.10\""
 full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart", "pyyaml"]
 
 [[package]]
+name = "tenacity"
+version = "8.2.2"
+description = "Retry code until it succeeds"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.extras]
+doc = ["reno", "sphinx", "tornado (>=4.5)"]
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -650,7 +661,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "4153ae966870db219242bfc3d533c8b0e19a036e1a2616081f463f43a4aa7929"
+content-hash = "9e5ed92eebb01f624d051f90b3abb8c5e4fa5c83bcfdb7aa819d4ee29e54fb3c"
 
 [metadata.files]
 alembic = [
@@ -1187,6 +1198,10 @@ sqlalchemy = [
 starlette = [
     {file = "starlette-0.22.0-py3-none-any.whl", hash = "sha256:b5eda991ad5f0ee5d8ce4c4540202a573bb6691ecd0c712262d0bc85cf8f2c50"},
     {file = "starlette-0.22.0.tar.gz", hash = "sha256:b092cbc365bea34dd6840b42861bdabb2f507f8671e642e8272d2442e08ea4ff"},
+]
+tenacity = [
+    {file = "tenacity-8.2.2-py3-none-any.whl", hash = "sha256:2f277afb21b851637e8f52e6a613ff08734c347dc19ade928e519d7d2d8569b0"},
+    {file = "tenacity-8.2.2.tar.gz", hash = "sha256:43af037822bd0029025877f3b2d97cc4d7bb0c2991000a3d59d71517c5c969e0"},
 ]
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
