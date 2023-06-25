@@ -2,7 +2,7 @@ import os
 import secrets
 
 from dotenv import load_dotenv
-from pydantic import BaseSettings
+from pydantic import BaseSettings, EmailStr
 
 load_dotenv()
 
@@ -22,6 +22,9 @@ class Settings(BaseSettings):
     POSTGRES_DB: str = os.getenv("POSTGRES_DB", "tdd")
     SQLALCHEMY_DATABASE_URI = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
     # SQLALCHEMY_DATABASE_URI = "sqlite:///app.db"
+
+    FIRST_SUPERUSER: EmailStr = os.getenv("FIRST_SUPERUSER")
+    FIRST_SUPERUSER_PASSWORD: str = os.getenv("FIRST_SUPERUSER_PASSWORD")
 
     class Config:
         env_file = ".env"
