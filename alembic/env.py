@@ -14,7 +14,6 @@ config = context.config
 
 # this will overwrite the ini-file sqlalchemy.url path
 # with the path given in the config of the main code
-#config.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
 config.set_main_option("sqlalchemy.url", settings.SQLALCHEMY_DATABASE_URI)
 
 # Interpret the config file for Python logging.
@@ -35,14 +34,6 @@ target_metadata = Base.metadata
 # ... etc.
 
 
-# def get_url():
-#     user = os.getenv("POSTGRES_USER", "postgres")
-#     password = os.getenv("POSTGRES_PASSWORD", "")
-#     server = os.getenv("POSTGRES_SERVER", "db")
-#     db = os.getenv("POSTGRES_DB", "app")
-#     return f"postgresql://{user}:{password}@{server}/{db}"
-
-
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
 
@@ -55,9 +46,7 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    # url = config.get_main_option("sqlalchemy.url")
     url = settings.SQLALCHEMY_DATABASE_URI
-    # url = get_url()
     context.configure(
         url=url,
         target_metadata=target_metadata,
